@@ -13,7 +13,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.LoginButton.setOnClickListener {
+        binding.loginButton.setOnClickListener {
 
         }
     }

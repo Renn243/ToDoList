@@ -7,4 +7,5 @@
     <string name="passwordHint">********</string>
     <string name="loginText1">Don\'t have an account?</string>
     <string name="register">Register</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
