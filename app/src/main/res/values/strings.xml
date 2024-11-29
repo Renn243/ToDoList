@@ -8,4 +8,9 @@
     <string name="loginText1">Don\'t have an account?</string>
     <string name="register">Register</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="emptyText1">What do you want to do today?</string>
+    <string name="emptyText2">Tap + to add your tasks</string>
+    <string name="taskText">My Task</string>
+    <string name="empty_image">empty image</string>
+    <string name="add_button">add button</string>
 </resources>
