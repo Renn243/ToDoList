@@ -13,4 +13,8 @@
     <string name="taskText">My Task</string>
     <string name="empty_image">empty image</string>
     <string name="add_button">add button</string>
+    <string name="task_title">Task Title</string>
+    <string name="time">Time</string>
+    <string name="category">Category</string>
+    <string name="priority">0</string>
 </resources>
