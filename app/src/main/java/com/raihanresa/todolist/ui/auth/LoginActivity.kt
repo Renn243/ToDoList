@@ -61,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
                             .create()
                         dialog.show()
                     }
-
                 }
             }
         }
