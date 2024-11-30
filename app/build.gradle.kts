@@ -61,6 +61,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
-
+    implementation("jp.wasabeef:blurry:4.0.1")
 
 }
