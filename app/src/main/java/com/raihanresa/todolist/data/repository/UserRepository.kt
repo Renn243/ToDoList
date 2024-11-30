@@ -12,11 +12,11 @@ import com.raihanresa.todolist.data.remote.response.RegisterResponse
 
 class UserRepository(private val apiService: ApiService) {
 
-    fun login(email: String, password: String): LiveData<ResultState<LoginResponse>> =
+    fun login(username: String, password: String): LiveData<ResultState<LoginResponse>> =
         liveData {
             emit(ResultState.Loading)
             try {
-                val request = LoginRequest(email, password)
+                val request = LoginRequest(username, password)
                 val response = apiService.login(request)
                 if (response.isSuccessful) {
                     emit(ResultState.Success(response.body()!!))
@@ -28,7 +28,7 @@ class UserRepository(private val apiService: ApiService) {
             }
         }
 
-    fun register(name: String, username: String, password: String): LiveData<ResultState<RegisterResponse>> =
+    fun register(username: String, password: String): LiveData<ResultState<RegisterResponse>> =
         liveData {
             emit(ResultState.Loading)
             try {
