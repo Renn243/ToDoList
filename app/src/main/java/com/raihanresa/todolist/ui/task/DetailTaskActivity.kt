@@ -3,16 +3,16 @@ package com.raihanresa.todolist.ui.task
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.raihanresa.todolist.databinding.ActivityAddTaskBinding
+import com.raihanresa.todolist.databinding.ActivityDetailTaskBinding
 import com.raihanresa.todolist.ui.main.MainActivity
 
-class AddTaskActivity : AppCompatActivity() {
+class DetailTaskActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAddTaskBinding
+    private lateinit var binding: ActivityDetailTaskBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddTaskBinding.inflate(layoutInflater)
+        binding = ActivityDetailTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.backButton.setOnClickListener {
@@ -21,10 +21,8 @@ class AddTaskActivity : AppCompatActivity() {
             finishAffinity()
         }
 
-        binding.sendButton.setOnClickListener {
-            val intent = Intent(this, AddTaskActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
+        binding.editButton.setOnClickListener {
+
         }
     }
 }

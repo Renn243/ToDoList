@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.task.AddTaskActivity">
+    tools:context=".ui.task.DetailTaskActivity">
 
     <ImageButton
         android:id="@+id/backButton"
@@ -16,59 +16,35 @@
         android:src="@drawable/baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/back_button"/>
+        android:contentDescription="@string/back_button" />
 
     <TextView
-        android:id="@+id/taskText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="36dp"
-        android:text="@string/add_task"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/backButton"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/titleEditTextLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:layout_marginStart="36dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="36dp"
-        app:layout_constraintTop_toBottomOf="@id/taskText"
+        android:text="@string/title"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:hint="@string/title">
+        app:layout_constraintTop_toBottomOf="@id/backButton" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/titleEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descriptionEditTextLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <TextView
+        android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginStart="36dp"
         android:layout_marginEnd="36dp"
-        app:layout_constraintTop_toBottomOf="@id/titleEditTextLayout"
+        android:text="@string/description"
+        android:textSize="16sp"
+        android:textColor="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:hint="@string/description">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/descriptionEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/timerText"
@@ -76,11 +52,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="48dp"
-        android:text="Task Time :"
+        android:text="@string/task_time"
         android:textSize="16sp"
         android:drawablePadding="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/descriptionEditTextLayout"
+        app:layout_constraintTop_toBottomOf="@id/description"
         app:drawableStartCompat="@drawable/timer" />
 
     <TextView
@@ -103,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginStart="36dp"
-        android:text="Task Priority"
+        android:text="@string/task_priority"
         android:textSize="16sp"
         android:drawablePadding="12dp"
         app:layout_constraintTop_toBottomOf="@id/timerText"
@@ -131,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginStart="36dp"
-        android:text="Task Category"
+        android:text="@string/task_category"
         android:textSize="16sp"
         android:drawablePadding="12dp"
         app:layout_constraintTop_toBottomOf="@id/priorityText"
@@ -153,16 +129,33 @@
         app:layout_constraintVertical_bias="0.0"
         app:drawableStartCompat="@drawable/baseline_add_24" />
 
-    <ImageButton
-        android:id="@+id/sendButton"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:drawablePadding="12dp"
+        android:text="@string/delete_task"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:clickable="true"
+        app:drawableStartCompat="@drawable/trash"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/categoryText"
+        android:focusable="true" />
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
         android:layout_marginBottom="36dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:text="@string/edit_task"
         android:contentDescription="@string/next_button"
-        android:src="@drawable/send"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
