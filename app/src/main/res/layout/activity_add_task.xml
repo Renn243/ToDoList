@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="48dp"
-        android:text="Task Time :"
+        android:text="@string/task_time"
         android:textSize="16sp"
         android:drawablePadding="12dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,14 +88,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
+        android:padding="5dp"
         android:background="@drawable/label"
         android:backgroundTint="@color/blue"
+        android:textColor="@color/white"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/timerText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/timerText"
         app:layout_constraintTop_toTopOf="@id/timerText"
-        app:drawableStartCompat="@drawable/baseline_add_24" />
+        app:drawableStartCompat="@drawable/baseline_add_24"
+        android:clickable="true"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/priorityText"
@@ -103,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginStart="36dp"
-        android:text="Task Priority"
+        android:text="@string/task_priority"
         android:textSize="16sp"
         android:drawablePadding="12dp"
         app:layout_constraintTop_toBottomOf="@id/timerText"
@@ -115,15 +120,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
+        android:padding="5dp"
         android:background="@drawable/label"
         android:backgroundTint="@color/blue"
+        android:textColor="@color/white"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/priorityText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/priorityText"
         app:layout_constraintTop_toTopOf="@id/priorityText"
         app:layout_constraintVertical_bias="0.0"
-        app:drawableStartCompat="@drawable/baseline_add_24" />
+        app:drawableStartCompat="@drawable/baseline_add_24"
+        android:clickable="true"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/categoryText"
@@ -131,7 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginStart="36dp"
-        android:text="Task Category"
+        android:text="@string/task_category"
         android:textSize="16sp"
         android:drawablePadding="12dp"
         app:layout_constraintTop_toBottomOf="@id/priorityText"
@@ -143,15 +153,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
+        android:padding="5dp"
         android:background="@drawable/label"
         android:backgroundTint="@color/blue"
+        android:textColor="@color/white"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/categoryText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/categoryText"
         app:layout_constraintTop_toTopOf="@id/categoryText"
         app:layout_constraintVertical_bias="0.0"
-        app:drawableStartCompat="@drawable/baseline_add_24" />
+        app:drawableStartCompat="@drawable/baseline_add_24"
+        android:clickable="true"
+        android:focusable="true" />
 
     <ImageButton
         android:id="@+id/sendButton"
