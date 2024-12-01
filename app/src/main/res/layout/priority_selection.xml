@@ -1,0 +1,98 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/taskPriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/task_priority"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/label"
+        android:backgroundTint="@color/blue"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:alignmentMode="alignMargins">
+
+        <Button
+            android:id="@+id/priority1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:text="@string/_1"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/flag"
+            android:background="@drawable/priority_button_selector"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/priority2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:text="@string/_2"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/flag"
+            android:background="@drawable/priority_button_selector"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/priority3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:text="@string/_3"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/flag"
+            android:background="@drawable/priority_button_selector"
+            android:gravity="center"/>
+
+    </GridLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+</LinearLayout>
