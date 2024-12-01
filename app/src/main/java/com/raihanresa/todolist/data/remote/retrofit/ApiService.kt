@@ -1,10 +1,12 @@
 package com.raihanresa.todolist.data.remote.retrofit
 
 import com.raihanresa.todolist.data.remote.request.AddTaskRequest
+import com.raihanresa.todolist.data.remote.request.EditTaskRequest
 import com.raihanresa.todolist.data.remote.request.LoginRequest
 import com.raihanresa.todolist.data.remote.request.RegisterRequest
 import com.raihanresa.todolist.data.remote.response.AddTaskResponse
 import com.raihanresa.todolist.data.remote.response.DeleteTaskResponse
+import com.raihanresa.todolist.data.remote.response.EditTaskResponse
 import com.raihanresa.todolist.data.remote.response.LoginResponse
 import com.raihanresa.todolist.data.remote.response.RegisterResponse
 import com.raihanresa.todolist.data.remote.response.UserTaskResponse
@@ -13,6 +15,7 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ApiService {
@@ -37,5 +40,11 @@ interface ApiService {
 
     @DELETE("tasks/{id}")
     suspend fun deleteTask(@Path("id") id: Int): Response<DeleteTaskResponse>
+
+    @PUT("tasks/{id}")
+    suspend fun editTask(
+        @Path("id") id: Int,
+        @Body request: EditTaskRequest
+    ): Response<EditTaskResponse>
 
 }

@@ -57,42 +57,61 @@ class DetailTaskActivity : AppCompatActivity() {
         }
 
         binding.deleteButton.setOnClickListener {
-            taskViewModel.deleteTask(id).observe(this) { result ->
-                when (result) {
-                    is ResultState.Loading -> {
-                        binding.progressIndicator.visibility = View.VISIBLE
-                    }
-
-                    is ResultState.Success -> {
-                        binding.progressIndicator.visibility = View.GONE
-
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finishAffinity()
-                    }
-
-                    is ResultState.Error -> {
-                        binding.progressIndicator.visibility = View.GONE
-                        val errorMessage = result.message.let {
-                            try {
-                                val json = JSONObject(it)
-                                json.getString("errors")
-                            } catch (e: JSONException) {
-                                it
+            // Menampilkan dialog konfirmasi sebelum menghapus task
+            val dialog = AlertDialog.Builder(this)
+                .setTitle("Delete Task")
+                .setMessage("Are you sure you want to delete this task?")
+                .setPositiveButton("Yes") { _, _ ->
+                    // Melakukan penghapusan task setelah konfirmasi
+                    taskViewModel.deleteTask(id).observe(this) { result ->
+                        when (result) {
+                            is ResultState.Loading -> {
+                                binding.progressIndicator.visibility = View.VISIBLE
                             }
-                        } ?: "An error occurred"
-                        val dialog = AlertDialog.Builder(this)
-                            .setMessage(errorMessage)
-                            .setPositiveButton("OK", null)
-                            .create()
-                        dialog.show()
+
+                            is ResultState.Success -> {
+                                binding.progressIndicator.visibility = View.GONE
+
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finishAffinity()
+                            }
+
+                            is ResultState.Error -> {
+                                binding.progressIndicator.visibility = View.GONE
+                                val errorMessage = result.message.let {
+                                    try {
+                                        val json = JSONObject(it)
+                                        json.getString("errors")
+                                    } catch (e: JSONException) {
+                                        it
+                                    }
+                                } ?: "An error occurred"
+                                val errorDialog = AlertDialog.Builder(this)
+                                    .setMessage(errorMessage)
+                                    .setPositiveButton("OK", null)
+                                    .create()
+                                errorDialog.show()
+                            }
+                        }
                     }
                 }
-            }
+                .setNegativeButton("No", null) // Tombol untuk membatalkan
+                .create()
+
+            dialog.show()
         }
 
         binding.editButton.setOnClickListener {
-
+            val intent = Intent(this, EditTaskActivity::class.java).apply {
+                putExtra("id", id)
+                putExtra("title", title)
+                putExtra("description", description)
+                putExtra("time", time)
+                putExtra("priority", priority)
+                putExtra("category", category)
+            }
+            startActivity(intent)
         }
     }
 

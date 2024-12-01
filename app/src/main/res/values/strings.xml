@@ -29,4 +29,19 @@
     <string name="delete_task">Delete Task</string>
     <string name="edit_task">Edit Task</string>
     <string name="back_button">back button</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="grocery">Grocery</string>
+    <string name="work">Work</string>
+    <string name="sport">Sport</string>
+    <string name="design">Design</string>
+    <string name="university">University</string>
+    <string name="social">Social</string>
+    <string name="music">Music</string>
+    <string name="health">Health</string>
+    <string name="movie">Movie</string>
+    <string name="add_category">Add Category</string>
 </resources>
