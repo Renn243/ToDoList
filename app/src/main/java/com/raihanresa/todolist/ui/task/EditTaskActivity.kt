@@ -59,8 +59,9 @@ class EditTaskActivity : AppCompatActivity() {
         binding.addCategory.text = categoryOld
 
         binding.backButton.setOnClickListener {
-            val intent = Intent(this, AddTaskActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         binding.sendButton.setOnClickListener {
