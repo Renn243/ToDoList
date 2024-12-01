@@ -10,4 +10,5 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
     fun addTask(title: String, description: String, time: String, priority: String, category: String, userId: Int) =
         taskRepository.addTask(title, description, time, priority, category, userId)
 
+    fun deleteTask(userId: Int) = taskRepository.deleteTask(userId)
 }

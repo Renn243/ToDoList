@@ -47,8 +47,10 @@ class TaskAdapter : ListAdapter<DataItem, TaskAdapter.MyViewHolder>(DIFF_CALLBAC
                 val intent = Intent(itemView.context, DetailTaskActivity::class.java).apply {
                     putExtra("title", task.title)
                     putExtra("description", task.description)
-                    putExtra("category", category)
+                    putExtra("category", task.category)
+                    putExtra("time", task.time)
                     putExtra("priority", task.priority)
+                    putExtra("id", task.id)
                 }
                 itemView.context.startActivity(intent)
             }
