@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +14,7 @@ import com.raihanresa.todolist.data.local.UserPreference
 import com.raihanresa.todolist.data.remote.ResultState
 import com.raihanresa.todolist.databinding.ActivityMainBinding
 import com.raihanresa.todolist.ui.adapter.TaskAdapter
+import com.raihanresa.todolist.ui.auth.LoginActivity
 import com.raihanresa.todolist.ui.task.AddTaskActivity
 import com.raihanresa.todolist.ui.viewmodel.TaskViewModel
 import com.raihanresa.todolist.ui.viewmodel.ViewModelFactory
@@ -43,6 +45,10 @@ class MainActivity : AppCompatActivity() {
         binding.addButton.setOnClickListener {
             val intent = Intent(this, AddTaskActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.logoutButton.setOnClickListener {
+            showLogoutConfirmationDialog()
         }
     }
 
@@ -101,5 +107,29 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Are you sure you want to logout?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { _, _ ->
+                logout()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    private fun logout() {
+        lifecycleScope.launch {
+            userPreference.clear()
+        }
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finishAffinity()
     }
 }
