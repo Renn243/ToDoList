@@ -1,34 +1,51 @@
 package com.raihanresa.todolist.ui.task
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
 import com.raihanresa.todolist.R
+import com.raihanresa.todolist.data.local.UserPreference
+import com.raihanresa.todolist.data.remote.ResultState
 import com.raihanresa.todolist.databinding.ActivityAddTaskBinding
 import com.raihanresa.todolist.ui.main.MainActivity
+import com.raihanresa.todolist.ui.viewmodel.TaskViewModel
+import com.raihanresa.todolist.ui.viewmodel.ViewModelFactory
+import org.json.JSONException
+import org.json.JSONObject
 import java.util.Calendar
 
 class AddTaskActivity : AppCompatActivity() {
 
+    private val taskViewModel: TaskViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
     private lateinit var binding: ActivityAddTaskBinding
+    private lateinit var userPreference: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userPreference = UserPreference.getInstance(this)
 
         binding.backButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -37,10 +54,52 @@ class AddTaskActivity : AppCompatActivity() {
         }
 
         binding.sendButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
+            val title = binding.titleEditText.text.toString()
+            val description = binding.descriptionEditText.text.toString()
+            val time = binding.addTimer.text.toString()
+            val priority = binding.addPriority.text.toString()
+            val category = binding.addCategory.text.toString()
+
+            lifecycleScope.launchWhenStarted {
+                userPreference.userIdFlow.collect { id ->
+                    if (id != null) {
+                        taskViewModel.addTask(title, description, time, priority, category, id)
+                            .observe(this@AddTaskActivity) { result ->
+                                when (result) {
+                                    is ResultState.Loading -> {
+                                        binding.progressIndicator.visibility = View.VISIBLE
+                                    }
+                                    is ResultState.Success -> {
+                                        binding.progressIndicator.visibility = View.GONE
+                                        startActivity(Intent(this@AddTaskActivity, MainActivity::class.java))
+                                        finishAffinity()
+                                    }
+                                    is ResultState.Error -> {
+                                        binding.progressIndicator.visibility = View.GONE
+                                        val errorMessage = result.message.let {
+                                            try {
+                                                val json = JSONObject(it)
+                                                json.getString("errors")
+                                            } catch (e: JSONException) {
+                                                it
+                                            }
+                                        } ?: "An error occurred"
+                                        val dialog = AlertDialog.Builder(this@AddTaskActivity)
+                                            .setMessage(errorMessage)
+                                            .setPositiveButton("OK", null)
+                                            .create()
+                                        dialog.show()
+                                    }
+                                }
+                            }
+                    } else {
+                        Toast.makeText(this@AddTaskActivity, "User ID not found!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
+
+
 
         binding.addTimer.setOnClickListener {
             openDateTimePicker()
@@ -103,6 +162,7 @@ class AddTaskActivity : AppCompatActivity() {
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
     }
 
+    @SuppressLint("InflateParams")
     private fun openPriorityDialog() {
         val dialog = Dialog(this)
         val dialogView = LayoutInflater.from(this).inflate(R.layout.priority_selection, null)
@@ -148,6 +208,7 @@ class AddTaskActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    @SuppressLint("InflateParams")
     private fun openCategoryDialog() {
         val dialog = Dialog(this)
         val dialogView = LayoutInflater.from(this).inflate(R.layout.category_selection, null)
@@ -259,10 +320,4 @@ class AddTaskActivity : AppCompatActivity() {
 
         dialog.show()
     }
-
-    private fun resetCategoryTextColor(vararg textViews: TextView) {
-        textViews.forEach { it.setTextColor(Color.BLACK) }
-    }
-
-    data class Category(val title: String, val color: String, val outlineDrawable: Int)
 }

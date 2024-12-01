@@ -7,4 +7,7 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
 
     fun getTaskById(id: Int) = taskRepository.getTaskById(id)
 
+    fun addTask(title: String, description: String, time: String, priority: String, category: String, userId: Int) =
+        taskRepository.addTask(title, description, time, priority, category, userId)
+
 }

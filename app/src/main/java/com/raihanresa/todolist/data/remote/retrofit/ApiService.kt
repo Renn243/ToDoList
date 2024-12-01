@@ -1,7 +1,9 @@
 package com.raihanresa.todolist.data.remote.retrofit
 
+import com.raihanresa.todolist.data.remote.request.AddTaskRequest
 import com.raihanresa.todolist.data.remote.request.LoginRequest
 import com.raihanresa.todolist.data.remote.request.RegisterRequest
+import com.raihanresa.todolist.data.remote.response.AddTaskResponse
 import com.raihanresa.todolist.data.remote.response.LoginResponse
 import com.raihanresa.todolist.data.remote.response.RegisterResponse
 import com.raihanresa.todolist.data.remote.response.UserTaskResponse
@@ -22,6 +24,11 @@ interface ApiService {
     suspend fun register(
         @Body request: RegisterRequest
     ): Response<RegisterResponse>
+
+    @POST("tasks")
+    suspend fun addTask(
+        @Body request: AddTaskRequest
+    ): Response<AddTaskResponse>
 
     @GET("tasks/user/{id}")
     suspend fun getTaskById(@Path("id") id: Int): Response<UserTaskResponse>
