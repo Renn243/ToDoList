@@ -5,4 +5,14 @@
     <color name="blue">#8687E7</color>
     <color name="gray">#686D76</color>
     <color name="red">#FA4032</color>
+
+    <color name="grocery">#CCFF80</color>
+    <color name="work">#FF9680</color>
+    <color name="sport">#80FFFF</color>
+    <color name="design">#80FFD9</color>
+    <color name="university">#809CFF</color>
+    <color name="social">#FF80EB</color>
+    <color name="music">#FC80FF</color>
+    <color name="health">#80FFA3</color>
+    <color name="movie">#80D1FF</color>
 </resources>
